@@ -1,4 +1,4 @@
-package org.adridadou.ethereum.propeller.backend;
+package org.adridadou.ethereum.propeller.js;
 
 
 import org.adridadou.ethereum.propeller.values.EthAccount;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by davidroon on 22.01.17.
  * This code is released under Apache 2 license
  */
-public class TestConfig {
+public class EthereumJsConfig {
     private static final int DEFAULT_GAS_LIMIT = 4_700_000;
     private static final GasPrice DEFAULT_GAS_PRICE = new GasPrice(EthValue.wei(50_000_000_000L));
     private final Date initialTime;
@@ -21,7 +21,7 @@ public class TestConfig {
     private final GasPrice gasPrice;
     private final Map<EthAccount, EthValue> balances;
 
-    public TestConfig(Date initialTime, long gasLimit, GasPrice gasPrice, Map<EthAccount, EthValue> balances) {
+    public EthereumJsConfig(Date initialTime, long gasLimit, GasPrice gasPrice, Map<EthAccount, EthValue> balances) {
         this.initialTime = initialTime;
         this.gasLimit = gasLimit;
         this.gasPrice = gasPrice;
@@ -74,8 +74,8 @@ public class TestConfig {
             return this;
         }
 
-        public TestConfig build() {
-            return new TestConfig(initialTime, gasLimit, gasPrice, balances);
+        public EthereumJsConfig build() {
+            return new EthereumJsConfig(initialTime, gasLimit, gasPrice, balances);
         }
     }
 }

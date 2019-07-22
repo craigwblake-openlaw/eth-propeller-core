@@ -5,8 +5,8 @@ import java.util.Optional
 import java.util.concurrent.CompletableFuture
 
 import com.google.common.collect.Lists
-import org.adridadou.ethereum.propeller.backend.{EthereumTest, TestConfig}
 import org.adridadou.ethereum.propeller.exception.EthereumApiException
+import org.adridadou.ethereum.propeller.js.{EthereumJs, EthereumJsConfig}
 import org.adridadou.ethereum.propeller.keystore.AccountProvider
 import org.adridadou.ethereum.propeller.solidity.SolidityContractDetails
 import org.adridadou.ethereum.propeller.values.EthValue.ether
@@ -24,7 +24,7 @@ import scala.compat.java8.OptionConverters._
 class EventsTest extends FlatSpec with Matchers with Checkers {
 
   private val mainAccount = AccountProvider.fromSeed("hello")
-  private val ethereum = CoreEthereumFacadeProvider.create(new EthereumTest(TestConfig.builder.balance(mainAccount, ether(1000)).build), EthereumConfig.builder().build())
+  private val ethereum = CoreEthereumFacadeProvider.create(new EthereumJs(EthereumJsConfig.builder.balance(mainAccount, ether(1000)).build), EthereumConfig.builder().build())
   private val contractSource = SoliditySource.from(new File("src/test/resources/contractEvents.sol"))
   private val address = publishAndMapContract(ethereum)
 

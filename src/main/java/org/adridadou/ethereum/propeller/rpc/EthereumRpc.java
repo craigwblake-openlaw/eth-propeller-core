@@ -72,10 +72,9 @@ public class EthereumRpc implements EthereumBackend {
         Bytes payload = Bytes.of(request.getData().data);
         SECP256K1.KeyPair keyPair = SECP256K1.KeyPair.fromSecretKey(SECP256K1.SecretKey.fromInteger(request.getAccount().getBigIntPrivateKey()));
         if (request.getAddress().isEmpty()) {
-            Address address = null;
             //the signature gets generated when the Transaction is created
             return new org.apache.tuweni.eth.Transaction(nonceInt, gasPriceWei, gasLimitWei,
-                    address, value, payload, keyPair, chainId.id);
+                    null, value, payload, keyPair, chainId.id);
         }
         else {
             Address address = Address.fromBytes(Bytes.of(request.getAddress().toData().data));

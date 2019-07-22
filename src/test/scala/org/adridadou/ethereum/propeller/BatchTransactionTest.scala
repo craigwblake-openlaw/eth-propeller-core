@@ -1,12 +1,10 @@
 package org.adridadou.ethereum.propeller
 
 import java.util.concurrent.{CompletableFuture, TimeUnit}
-import java.util.function.Consumer
 
 import io.reactivex.{BackpressureStrategy, Observable}
-import io.reactivex.internal.functions.Functions
 import io.reactivex.subjects.PublishSubject
-import org.adridadou.ethereum.propeller.backend.{EthereumTest, TestConfig}
+import org.adridadou.ethereum.propeller.js.{EthereumJs, EthereumJsConfig}
 import org.adridadou.ethereum.propeller.keystore.AccountProvider
 import org.adridadou.ethereum.propeller.values.EthValue._
 import org.adridadou.ethereum.propeller.values.{CallDetails, _}
@@ -16,7 +14,7 @@ import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
 import scala.compat.java8.FutureConverters
-import scala.concurrent.{ExecutionContext, Future, Promise}
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
 /**
@@ -31,7 +29,7 @@ class BatchTransactionTest extends FlatSpec with Matchers with Checkers {
 
   private val mainAccount = AccountProvider.fromSeed("Main Test Account")
   private val ethereum = CoreEthereumFacadeProvider
-    .create(new EthereumTest(TestConfig.builder.balance(mainAccount, ether(1000)).build), EthereumConfig.builder().build())
+    .create(new EthereumJs(EthereumJsConfig.builder.balance(mainAccount, ether(1000)).build), EthereumConfig.builder().build())
 
   private val pendingTransactions = mutable.Map[Int, Future[CallDetails]]()
   private val publisher: PublishSubject[Int] = PublishSubject.create()

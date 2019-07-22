@@ -4,9 +4,7 @@ import org.adridadou.ethereum.propeller.event.BlockInfo;
 import org.adridadou.ethereum.propeller.event.EthereumEventHandler;
 import org.adridadou.ethereum.propeller.solidity.SolidityEvent;
 import org.adridadou.ethereum.propeller.values.*;
-import org.web3j.abi.datatypes.Event;
 import org.web3j.protocol.core.DefaultBlockParameter;
-import org.web3j.protocol.core.methods.response.Log;
 
 import java.util.List;
 import java.util.Optional;
